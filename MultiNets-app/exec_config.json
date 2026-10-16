@@ -1,0 +1,45 @@
+{
+	"_copyright": "Copyright (C) 2026 Renesas Electronics Corporation",
+	"_license": "Apache-2.0",
+	"app-opts": {
+		"frame_per_loop": 2,
+		"number_of_loops": 1,
+		"warmup": true
+	},
+	"compile-opts": {
+		"threads": 2,
+		"stream_input": false,
+		"print_inference": true
+	},
+	"inputs": {
+		"in0": {
+			"file": "multinets-app/test_data/cat.jpg",
+			"quantize": { "scale": 0.01865844801068306, "zero": -14 }
+		},
+		"in1": {
+			"file": "multinets-app/test_data/cat.jpg",
+			"quantize": { "scale": 0.01865844801068306, "zero": -14 }
+		}
+	},
+	"outputs": {
+		"out0": [ { "dequantize": { "scale": 0.003920175600796938, "zero": -128 } } ],
+		"out1": [ { "dequantize": { "scale": 0.16565652191638947,  "zero": -57  } } ]
+	},
+	"models": {
+		"mobv1": {
+			"file": "multinets-app/models/mobilenet_v1_224_op13_sim_quant_tvm0.so",
+			"runtime": "tvm"
+		},
+		"mobv2": {
+			"file": "multinets-app/models/mobilenetv2-10_op13_sim_quant_tvm1.so",
+			"runtime": "tvm"
+		}
+	},
+	"connections": [
+		"in0[0]   -> mobv1[0]",
+		"in1[0]   -> mobv2[0]",
+		"mobv1[0] -> out0[0]",
+		"mobv2[0] -> out1[0]"
+	],
+	"threads": [ "mobv1", "mobv2" ]
+}

@@ -1,0 +1,55 @@
+{
+	"_copyright": "Copyright (C) 2026 Renesas Electronics Corporation",
+	"_license": "Apache-2.0",
+	"app-opts": {
+		"frame_per_loop": 4,
+		"number_of_loops": 100,
+		"warmup": true
+	},
+	"compile-opts": {
+		"threads": 4,
+		"stream_input": false,
+		"print_inference": false
+	},
+	"inputs": {
+		"in0": {
+			"file": "mobilenet_v1-app/test_data/cat.jpg",
+			"quantize": { "scale": 0.01865844801068306, "zero": -14 }
+		},
+		"in1": {
+			"file": "mobilenet_v1-app/test_data/duck.jpg",
+			"quantize": { "scale": 0.01865844801068306, "zero": -14 }
+		},
+		"in2": {
+			"file": "mobilenet_v1-app/test_data/golden_retriever.jpg",
+			"quantize": { "scale": 0.01865844801068306, "zero": -14 }
+		},
+		"in3": {
+			"file": "mobilenet_v1-app/test_data/malard.jpg",
+			"quantize": { "scale": 0.01865844801068306, "zero": -14 }
+		}
+	},
+	"outputs": {
+		"out0": [ { "dequantize": { "scale": 0.003920175600796938, "zero": -128 } } ],
+		"out1": [ { "dequantize": { "scale": 0.003920175600796938, "zero": -128 } } ],
+		"out2": [ { "dequantize": { "scale": 0.003920175600796938, "zero": -128 } } ],
+		"out3": [ { "dequantize": { "scale": 0.003920175600796938, "zero": -128 } } ]
+	},
+	"models": {
+		"tvm0": { "file": "mobilenet_v1-app/models/model_tvm0.so", "runtime": "tvm" },
+		"tvm1": { "file": "mobilenet_v1-app/models/model_tvm1.so", "runtime": "tvm" },
+		"tvm2": { "file": "mobilenet_v1-app/models/model_tvm2.so", "runtime": "tvm" },
+		"tvm3": { "file": "mobilenet_v1-app/models/model_tvm3.so", "runtime": "tvm" }
+	},
+	"connections": [
+		"in0[0]  -> tvm0[0]",
+		"in1[0]  -> tvm1[0]",
+		"in2[0]  -> tvm2[0]",
+		"in3[0]  -> tvm3[0]",
+		"tvm0[0] -> out0[0]",
+		"tvm1[0] -> out1[0]",
+		"tvm2[0] -> out2[0]",
+		"tvm3[0] -> out3[0]"
+	],
+	"workers": [ "tvm0", "tvm1", "tvm2", "tvm3" ]
+}

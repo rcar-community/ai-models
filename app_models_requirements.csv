@@ -1,0 +1,6 @@
+id,type,model_name,configs,weights,pytorch_options,onnx_options,quant_options,tvm_options,deploy_options,train_options,model_options,engine,command,preprocess
+,CLS,MobileNet_v1-app,,models/MobileNet_v1-app/mobilenet_v1_224_op13_sim_quant.onnx,not_available=True,,,,,,,custom,,
+,CLS,MobileNet_v2-app,,models/MobileNet_v2-app/mobilenetv2-10_op13_sim_quant.onnx,not_available=True,,,,,,,custom,,
+,CLS,ResNet50-app,,models/ResNet50-app/resnet50_v1_opset13_sim_quant.onnx,not_available=True,,,,,,,custom,,
+,CLS,MultiNets-app,,models/MultiNets-app/mobilenet_v1_224_op13_sim_quant.onnx,not_available=True,,,,,,,custom,,
+,CLS,ResNet18-app,,models/ResNet18-app/end2end_patched_quant.onnx,not_available=True,,,,,,,custom,,

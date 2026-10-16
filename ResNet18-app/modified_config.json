@@ -1,0 +1,52 @@
+{
+  "_copyright": "Copyright (C) 2026 Renesas Electronics Corporation",
+  "_license": "Apache-2.0",
+  "Renesas_User_Config": {
+    "Global_config": {
+      "TUNNEL_MODE_ENABLE": true,
+      "TILING_MODE_ENABLE": true,
+      "LIMIT_OF_CNNLAYER_LIFETIME": 30,
+      "HARDWARE_VERSION": "V4H2",
+      "MEMORY_BANDWIDTH": 10,
+      "MERGED_CHAIN_LAYER_LIMIT": 20,
+      "MULTI_DESC_DUMP_ENABLE": true,
+      "SCHEDULER_ENABLE": true,
+      "ENABLE_INFRASTRUCTURE_LOGGING": true,
+      "LOG_LEVEL": "WARNING",
+      "ENABLE_DTA": false,
+      "ENABLE_DMAC_MULTITHREADING": true,
+      "LARGE_KERNEL_FAST_MODE": true,
+      "TILING_MODE_STRIPE": true,
+      "REDUCE_TILING_OVERLAP": true,
+      "BRANCH_TUNNELING_ALGORITHM": "DP",
+      "GENERATION_TIME_TOLERANCE_LEVEL": 5,
+      "DECIDE_MERGED_CHAIN_LAYER_LIMIT_INTERNALLY": true,
+      "OPTIMIZATION_WITH_NO_DSP_LAYER": true,
+      "ENABLE_MEMORY_REUSE_OF_TUNNEL_INOUT_FEATURE_MAP": true,
+      "ENABLE_V4H2_CNNIP_DMAI_MAGNIFICATION_WORKAROUND": false,
+      "CL_ADDRESS_SETTING": {
+        "AUTOMATIC_ADJUST_MEMORY_MAP": true,
+        "PROCEDURES_BASE_ADDRESS": 0,
+        "PROCEDURES_SIZE": 0,
+        "NETWORK_INPUT_FEATURE_MAPS_BASE_ADDRESS": 3221225472,
+        "NETWORK_INPUT_FEATURE_MAPS_SIZE": 0,
+        "NETWORK_OUTPUT_FEATURE_MAPS_BASE_ADDRESS": 3221225472,
+        "NETWORK_OUTPUT_FEATURE_MAPS_BASE_SIZE": 0,
+        "INTERMEDIATE_FEATURE_MAPS_BASE_ADDRESS": 3221225472,
+        "INTERMEDIATE_FEATURE_MAPS_BASE_SIZE": 0,
+        "WEIGHT_DATA_BASE_ADDRESS": 3221225472,
+        "WEIGHT_DATA_SIZE": 0,
+        "ADDRESS_ALIGNMENT": 1024,
+        "WEIGHT_BANK_SIZE": 36864,
+        "WEIGHT_BANK_NUM": 4
+      }
+    },
+    "Layer_by_layer_config": {
+      "conv1_1/Conv2D": {
+        "OUTPUT_MEMORY": "IMPC",
+        "ENGINE": "CNNIP",
+        "LAYER_TYPE": "Convolution"
+      }
+    }
+  }
+}
