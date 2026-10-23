@@ -1,0 +1,2 @@
+id,type,model_name,configs,weights,pytorch_options,onnx_options,quant_options,tvm_options,deploy_options,train_options,model_options,engine,command,preprocess
+,CLS,EfficientNet_Lite0-app,,models/EfficientNet_Lite0-app/tf_efficientnet_lite0_sim_quant.onnx,not_available=True,,,,,,,custom,,

@@ -25,15 +25,15 @@ Renesas R-Car V4H [SparrowHawk reference board](https://rcar-community.github.io
 | Path | Description |
 |---|---|
 | [`app_models_requirements.csv`](app_models_requirements.csv) | Configuration file read by REACTION. Defines the model file and build options for each application. |
+| [`EfficientNet_Lite0-app`](EfficientNet_Lite0-app) | Ready-made outputs of every step of the [BYOM tutorial](https://example.com/renesas-ai-sdk-byom_DUMMY_LINK), using EfficientNet-Lite0 from [timm](https://github.com/huggingface/pytorch-image-models) (FP32 and quantized ONNX models, scripts and configuration files). Use them to skip steps of the tutorial. Not listed in `app_models_requirements.csv`; once registered, it runs in the same way as `MobileNet_v1-app`. See its [README](EfficientNet_Lite0-app/README.md). |
 | [`LICENSES`](LICENSES) | Full text of the licenses referenced by this repository. |
 
 ## License
 
 All files in this repository are licensed under
 [Apache-2.0](LICENSES/Apache-2.0.txt) — both the Renesas-authored files
-(Copyright Renesas Electronics Corporation) and the quantized ONNX models,
-which derive from the upstream projects listed above, each published under
-Apache-2.0.
+(Copyright Renesas Electronics Corporation) and the ONNX models, which derive
+from the upstream projects listed above, each published under Apache-2.0.
 
 There are no copyleft, non-commercial, or otherwise restricted files here. You
 may redistribute any file in this repository, including inside a compiled

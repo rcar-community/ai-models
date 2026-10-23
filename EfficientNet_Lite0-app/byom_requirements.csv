@@ -1,0 +1,2 @@
+id,type,priority,model_name,configs,weights,pytorch_options,onnx_options,quant_options,tvm_options,deploy_options,train_options,model_options,engine,command,preprocess
+,,,EfficientNet_Lite0,,models/EfficientNet_Lite0-app/tf_efficientnet_lite0.onnx,not_available=True,,,,code_path=models/EfficientNet_Lite0-app,,,byom:v3.47.0,,models/EfficientNet_Lite0-app/preprocess.py
