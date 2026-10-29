@@ -1,0 +1,63 @@
+From 396d1b10d680ab1a3ab475e384eda11aeca1014d Mon Sep 17 00:00:00 2001
+From: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Date: Wed, 28 Oct 2026 19:41:58 +0900
+Subject: [PATCH 07/15] gles-user-module: Add license information
+
+The recipe used LICENSE = "CLOSED" and skipped do_populate_lic, so the
+Renesas GFX license terms were not included in the SPDX data or in the
+license output.
+
+Fetch License.txt from the same rcar-gfx revision as the binaries and
+use it as the license text of "Renesas-GFX". Remove the noexec flag of
+do_populate_lic so that the license file is collected.
+
+Signed-off-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+---
+ include/rcar-gfx-common.inc                           |  3 +++
+ recipes-graphics/gles-user-module/gles-user-module.bb | 10 +++++++---
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/include/rcar-gfx-common.inc b/include/rcar-gfx-common.inc
+index 7799358..8ede563 100644
+--- a/include/rcar-gfx-common.inc
++++ b/include/rcar-gfx-common.inc
+@@ -8,3 +8,6 @@ GFX_DRIVER_SHA256="92a2be149a900f06b94aecc12e4ec768eec2a231c31c0f5719245d4cc75fe
+ 
+ GFX_LIBRARY_URL="${GFX_URL}/raw/${REVISION}/opengl/r8a779g3_linux_gsx_binaries_gles.tar.bz2;"
+ GFX_LIBRARY_SHA256="d1ca1d4c7504c89940c053bb64396eecc78179bcb0da7f64fc6d8f949c457980"
++
++GFX_LICENSE_URL="${GFX_URL}/raw/${REVISION}/License.txt"
++GFX_LICENSE_SHA256="8c6127e89d1ef0c2f8e12cd1cddc8f1027e27e14c568a5b56dfb0bd22073ef32"
+diff --git a/recipes-graphics/gles-user-module/gles-user-module.bb b/recipes-graphics/gles-user-module/gles-user-module.bb
+index de3236b..6521033 100644
+--- a/recipes-graphics/gles-user-module/gles-user-module.bb
++++ b/recipes-graphics/gles-user-module/gles-user-module.bb
+@@ -1,5 +1,7 @@
+ DESCRIPTION = "PowerVR GPU user module"
+-LICENSE = "CLOSED"
++LICENSE = "Renesas-GFX"
++LIC_FILES_CHKSUM = "file://rcar-gfx-License.txt;md5=7619a81bd8552964abfea3c94d8e7582"
++NO_GENERIC_LICENSE[Renesas-GFX] = "rcar-gfx-License.txt"
+ 
+ require include/rcar-gfx-common.inc
+ 
+@@ -13,7 +15,10 @@ RDEPENDS:${PN} = " \
+ PN = "gles-user-module"
+ PR = "r0"
+ 
+-SRC_URI:r8a779g3 = "${GFX_LIBRARY_URL};sha256sum=${GFX_LIBRARY_SHA256}"
++SRC_URI:r8a779g3 = " \
++    ${GFX_LIBRARY_URL};sha256sum=${GFX_LIBRARY_SHA256} \
++    ${GFX_LICENSE_URL};downloadfilename=rcar-gfx-License.txt;subdir=rogue;sha256sum=${GFX_LICENSE_SHA256} \
++"
+ 
+ SRC_URI:append:rcar-gen4 = " \
+     file://rc.pvr.service \
+@@ -25,7 +30,6 @@ S = "${WORKDIR}/rogue"
+ inherit systemd
+ SYSTEMD_SERVICE:${PN} = "rc.pvr.service"
+ 
+-do_populate_lic[noexec] = "1"
+ do_compile[noexec] = "1"
+ 
+ do_install() {

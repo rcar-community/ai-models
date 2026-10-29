@@ -1,0 +1,46 @@
+From 803271e53d35f1945ab6c9c4f3dd139e9b2a8d7d Mon Sep 17 00:00:00 2001
+From: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Date: Wed, 28 Oct 2026 20:13:39 +0900
+Subject: [PATCH 10/15] conf: Install license texts into rootfs
+
+Set COPY_LIC_MANIFEST and COPY_LIC_DIRS so that license.manifest and
+the license text of each package are installed into
+/usr/share/common-licenses of the image. This allows the license
+notices to be distributed together with the binaries.
+
+Signed-off-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+---
+ conf/templates/sparrow-hawk-weston/local.conf.sample | 4 ++++
+ conf/templates/sparrow-hawk/local.conf.sample        | 4 ++++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/conf/templates/sparrow-hawk-weston/local.conf.sample b/conf/templates/sparrow-hawk-weston/local.conf.sample
+index b9c9a18..df815b6 100644
+--- a/conf/templates/sparrow-hawk-weston/local.conf.sample
++++ b/conf/templates/sparrow-hawk-weston/local.conf.sample
+@@ -289,6 +289,10 @@ DISTRO_FEATURES:append = " pam"
+ # To build gstreamer plugins
+ LICENSE_FLAGS_ACCEPTED = "commercial"
+ 
++# Install license manifest and license texts into rootfs
++COPY_LIC_MANIFEST = "1"
++COPY_LIC_DIRS = "1"
++
+ # Remove ptest to reduce the build time
+ # Remove x11 to avoid error after removing mesa
+ DISTRO_FEATURES:remove = "ptest x11"
+diff --git a/conf/templates/sparrow-hawk/local.conf.sample b/conf/templates/sparrow-hawk/local.conf.sample
+index e94e1e6..ac3d59f 100644
+--- a/conf/templates/sparrow-hawk/local.conf.sample
++++ b/conf/templates/sparrow-hawk/local.conf.sample
+@@ -292,6 +292,10 @@ BBMASK = "kernel-module-gles|gles-user-module"
+ # Allow non-commercial to be built
+ LICENSE_FLAGS_ACCEPTED = "non-commercial"
+ 
++# Install license manifest and license texts into rootfs
++COPY_LIC_MANIFEST = "1"
++COPY_LIC_DIRS = "1"
++
+ # Reproducible Builds
+ # Set Timestamps at the build start
+ export SOURCE_DATE_EPOCH = "${@time.strftime('%s', time.localtime())}"

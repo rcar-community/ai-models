@@ -1,0 +1,33 @@
+From d7bdd4b695e3d60a9eea128e47eb2ebfe4f8faad Mon Sep 17 00:00:00 2001
+From: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Date: Wed, 28 Oct 2026 20:15:15 +0900
+Subject: [PATCH 11/15] kernel-devsrc: Also clear cleandirs of base_do_unpack
+
+1ce52df cleared cleandirs of do_unpack only. However, base.bbclass sets
+the same cleandirs flag on base_do_unpack, which do_unpack calls
+internally. spdx_get_src() of create-spdx executes do_unpack directly,
+so base_do_unpack still removes ${S} and work-shared/<machine>/
+kernel-source becomes empty during do_create_spdx of kernel-devsrc.
+
+Clear cleandirs of base_do_unpack as well.
+
+Fixes: 1ce52df ("kernel-devsrc: Fix empty kernel-source with SPDX source archiving")
+Signed-off-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+---
+ recipes-kernel/linux/kernel-devsrc.bbappend | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/recipes-kernel/linux/kernel-devsrc.bbappend b/recipes-kernel/linux/kernel-devsrc.bbappend
+index df81c11..d9c1f16 100644
+--- a/recipes-kernel/linux/kernel-devsrc.bbappend
++++ b/recipes-kernel/linux/kernel-devsrc.bbappend
+@@ -1,6 +1,8 @@
+ # kernel-devsrc sets S to STAGING_KERNEL_DIR and do_unpack is noexec.
+ # However, do_create_spdx (create-spdx with SPDX_INCLUDE_SOURCES = "1")
+-# calls do_unpack directly and cleandirs of do_unpack removes ${S}.
++# calls do_unpack directly and cleandirs of do_unpack and base_do_unpack
++# removes ${S}.
+ # This empties work-shared/<machine>/kernel-source and breaks the build of
+ # the kernel modules which run after that.
+ do_unpack[cleandirs] = ""
++base_do_unpack[cleandirs] = ""

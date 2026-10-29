@@ -1,0 +1,23 @@
+From 5e8f9e6ce879f3817b8bc6d6b2fbbd5f6af90b27 Mon Sep 17 00:00:00 2001
+From: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Date: Thu, 27 Nov 2025 14:09:26 +0900
+Subject: [PATCH 02/15] DEV: base-file: Change BSP version to development
+
+Signed-off-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+---
+ recipes-bsp/bsp-info/bsp-info.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/recipes-bsp/bsp-info/bsp-info.bb b/recipes-bsp/bsp-info/bsp-info.bb
+index 1988dc7..cb2a120 100644
+--- a/recipes-bsp/bsp-info/bsp-info.bb
++++ b/recipes-bsp/bsp-info/bsp-info.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-BSP_VERSION ??= "v2026-10-23"
++BSP_VERSION ??= "development"
+ KERNEL_VERSION = "${@bb.utils.contains("PREFERRED_PROVIDER_virtual/kernel", "linux-dummy", \
+     "Built by linux-dummy", \
+     "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}", d)}"

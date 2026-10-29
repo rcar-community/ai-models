@@ -1,0 +1,40 @@
+From 9b726dfe3a1540794b7cd8b002199b9a1b6a2c72 Mon Sep 17 00:00:00 2001
+From: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Date: Wed, 28 Oct 2026 20:10:32 +0900
+Subject: [PATCH 09/15] ipl-burning: Describe python-embed-amd64 in
+ LICENSE-index
+
+The embedded Python package for Windows contains third-party DLLs such
+as OpenSSL, libffi, SQLite and the Visual C++ runtime, but the license
+index did not say anything about them.
+
+Describe the origin and the modification of the package, and refer to
+the upstream license information for the bundled components instead of
+listing them, because the package is redistributed as obtained from
+python.org.
+
+Signed-off-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+---
+ recipes-dev/ipl-burning/files/LICENSE-index.txt | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/recipes-dev/ipl-burning/files/LICENSE-index.txt b/recipes-dev/ipl-burning/files/LICENSE-index.txt
+index 27540c6..fb578b8 100644
+--- a/recipes-dev/ipl-burning/files/LICENSE-index.txt
++++ b/recipes-dev/ipl-burning/files/LICENSE-index.txt
+@@ -15,7 +15,14 @@
+   License: Proprietary
+   LicensePath: ./License/LICENCE.r8a779g_pcie_phy
+ 
+-- python-embed-amd64
++- python-embed-amd64 (Windows only, used by run.bat)
++  Origin: python-3.13.4-embed-amd64.zip from https://www.python.org/ftp/python/3.13.4/
++  Modification: "import site" is enabled in python313._pth, and get-pip.py is added.
+   License: PSF License
+   License Text: ./python-embed-amd64/LICENSE.txt
++  Note: This package is redistributed as obtained from python.org and is not
++        covered by the other entries of this index. It contains third-party
++        components (e.g. OpenSSL, libffi, SQLite, Microsoft Visual C++ runtime).
++        Refer to the upstream license information for their terms:
++        https://docs.python.org/3.13/license.html
+ 
