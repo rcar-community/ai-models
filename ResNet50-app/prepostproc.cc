@@ -40,11 +40,10 @@ static void _preprocess_input(cv::Mat& normalized_image, const cv::Mat& image, i
   int y = (resized_image.rows - height) / 2;
   cv::Mat cropped_image = resized_image(cv::Rect(x, y, width, height));
 
-  cropped_image.convertTo(normalized_image, CV_32F, 1.0 / 255.0);
-  cv::Scalar mean(0.485, 0.456, 0.406);
-  cv::Scalar std(0.229, 0.224, 0.225);
+  // MLPerf ResNet50 v1.5 takes 0-255 RGB with the mean subtracted (no std scaling)
+  cropped_image.convertTo(normalized_image, CV_32F);
+  cv::Scalar mean(123.68, 116.78, 103.94);
   cv::subtract(normalized_image, mean, normalized_image);
-  cv::divide(normalized_image, std, normalized_image);
 }
 
 void preprocess_input(const char* model_name, const int input_idx, void* input, tvm::runtime::ShapeTuple shape,
